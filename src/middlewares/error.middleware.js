@@ -1,6 +1,5 @@
-// src/middlewares/error.middleware.js (actualizado)
 const errorHandler = (err, req, res, next) => {
-  // Log del error para depuración
+  
   console.error('ERROR:', err);
 
   // Errores de Axios (para las peticiones proxy a TheMovieDB)
@@ -22,7 +21,6 @@ const errorHandler = (err, req, res, next) => {
 
   // Errores de Prisma
   if (err.name === 'PrismaClientKnownRequestError') {
-    // Manejar errores específicos de Prisma
     if (err.code === 'P2002') {
       return res.status(409).json({
         error: `Ya existe un registro con ese ${err.meta.target.join(', ')}`

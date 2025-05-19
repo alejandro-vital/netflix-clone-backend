@@ -1,4 +1,3 @@
-// src/controllers/movies.controller.js
 const axios = require('axios');
 
 // Configuración base para todas las peticiones a TheMovieDB
@@ -158,8 +157,6 @@ const getImageUrl = (req, res) => {
   
   const imageUrl = `${process.env.TMDB_IMAGE_BASE_URL}/${size}${path}`;
   
-  // Podemos optar por redirigir a la imagen o devolver la URL
-  // Aquí devolvemos la URL para que el frontend tenga control sobre cómo mostrarla
   res.json({ url: imageUrl });
 };
 

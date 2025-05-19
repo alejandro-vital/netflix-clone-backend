@@ -1,4 +1,3 @@
-// src/controllers/favorite-movies.controller.js (ajustado)
 const favoriteMovieService = require('../services/favorite-movies.service');
 
 /**
@@ -7,16 +6,14 @@ const favoriteMovieService = require('../services/favorite-movies.service');
 const addMovieToFavorites = async (req, res, next) => {
   try {
     const { movieId, title, posterUrl, overview } = req.body || {};
-    const userId = req.userId; // Añadido por el middleware de autenticación
+    const userId = req.userId;
 
-    // Validar datos requeridos
     if (!movieId || !title || !posterUrl) {
       return res.status(400).json({ 
         error: 'Se requieren los campos movieId, title y posterUrl' 
       });
     }
 
-    // Verificar si la película ya está en favoritos
     const existingFavorite = await favoriteMovieService.findFavorite(userId, movieId);
     
     if (existingFavorite) {
@@ -26,7 +23,6 @@ const addMovieToFavorites = async (req, res, next) => {
       });
     }
 
-    // Agregar la película a favoritos
     const favorite = await favoriteMovieService.addMovieToFavorites(
       userId, 
       movieId, 
@@ -49,8 +45,7 @@ const addMovieToFavorites = async (req, res, next) => {
  */
 const getFavoriteMovies = async (req, res, next) => {
   try {
-    const userId = req.userId; // Añadido por el middleware de autenticación
-    
+    const userId = req.userId;
     const favorites = await favoriteMovieService.getFavoriteMovies(userId);
     
     res.json(favorites);

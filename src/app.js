@@ -1,9 +1,8 @@
-// src/app.js (actualizado)
 const express = require('express');
 const cors = require('cors');
 const authRoutes = require('./routes/auth.routes');
 const favoriteMoviesRoutes = require('./routes/favorite-movies.routes');
-const moviesRoutes = require('./routes/movies.routes'); // Nueva ruta de películas
+const moviesRoutes = require('./routes/movies.routes');
 const errorHandler = require('./middlewares/error.middleware');
 
 const app = express();
@@ -20,9 +19,9 @@ app.use(express.json());
 // Rutas de la API
 app.use('/api/auth', authRoutes);
 app.use('/api/favorites', favoriteMoviesRoutes);
-app.use('/api/movies', moviesRoutes); // Agregamos las rutas de películas
+app.use('/api/movies', moviesRoutes);
 
-// Ruta de prueba para verificar que el servidor está funcionando
+// Ruta para validar api
 app.get('/api/health', (req, res) => {
   res.json({ 
     status: 'OK', 
@@ -31,7 +30,7 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-// Manejo de errores centralizado
+// Manejo de errores
 app.use(errorHandler);
 
 module.exports = app;

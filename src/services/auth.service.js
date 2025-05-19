@@ -1,4 +1,3 @@
-// src/services/auth.service.js (actualizado)
 const prisma = require('../config/prisma');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -8,10 +7,8 @@ const jwt = require('jsonwebtoken');
  */
 const createUser = async (name, email, password) => {
   try {
-    // Hashear la contraseña
     const hashed = await bcrypt.hash(password, 10);
     
-    // Crear el usuario en la base de datos
     const user = await prisma.user.create({
       data: { 
         name, 
@@ -27,7 +24,6 @@ const createUser = async (name, email, password) => {
     
     return user;
   } catch (error) {
-    // Reenviar el error para manejarlo en el controlador
     throw error;
   }
 };
@@ -36,12 +32,10 @@ const createUser = async (name, email, password) => {
  * Autenticar usuario y generar JWT
  */
 const authenticateUser = async (email, password) => {
-  // Buscar usuario por email
   const user = await prisma.user.findUnique({ 
     where: { email: email.toLowerCase() } 
   });
   
-  // Si no existe el usuario
   if (!user) {
     throw { 
       status: 401, 
@@ -49,7 +43,6 @@ const authenticateUser = async (email, password) => {
     };
   }
 
-  // Verificar contraseña
   const valid = await bcrypt.compare(password, user.password);
   if (!valid) {
     throw { 
@@ -58,7 +51,6 @@ const authenticateUser = async (email, password) => {
     };
   }
 
-  // Generar token JWT
   const token = jwt.sign(
     { id: user.id }, 
     process.env.JWT_SECRET, 

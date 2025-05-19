@@ -39,7 +39,6 @@ const passwordRule = Joi.string()
     "any.required": "La contraseña es obligatoria",
   });
 
-// Schemas
 const registerSchema = Joi.object({
   name: nameRule,
   email: emailRule,

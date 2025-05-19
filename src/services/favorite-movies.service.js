@@ -1,4 +1,3 @@
-// src/services/favorite-movies.service.js (ajustado)
 const prisma = require('../config/prisma');
 
 /**
@@ -47,10 +46,8 @@ const removeFromFavorites = async (userId, movieId) => {
   try {
     console.log(`Servicio: Eliminando película con ID ${movieId} para usuario ${userId}`);
     
-    // Explícitamente aseguramos que movieId sea un número
     const parsedMovieId = parseInt(movieId, 10);
     
-    // Validamos si existe el favorito antes de intentar eliminarlo
     const favorite = await prisma.favorite.findUnique({
       where: {
         userId_movieId: {
@@ -77,8 +74,6 @@ const removeFromFavorites = async (userId, movieId) => {
     });
   } catch (error) {
     console.error('Error en removeFromFavorites:', error);
-    
-    // Si no existe la película en favoritos, retornamos null
     if (error.code === 'P2025') {
       return null;
     }

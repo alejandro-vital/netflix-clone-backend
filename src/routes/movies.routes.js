@@ -1,4 +1,3 @@
-// src/routes/movies.routes.js
 const express = require('express');
 const router = express.Router();
 const {
@@ -13,7 +12,7 @@ const {
   getImageUrl
 } = require('../controllers/movies.controller');
 
-// Rutas públicas (no requieren autenticación)
+// Rutas públicas (no requieren autesnticación)
 router.get('/trending', getTrending);
 router.get('/popular', getPopular);
 router.get('/top-rated', getTopRated);

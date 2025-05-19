@@ -1,4 +1,3 @@
-// src/routes/favorite-movies.routes.js (corregido)
 const express = require('express');
 const router = express.Router();
 const { 
@@ -8,7 +7,7 @@ const {
 } = require('../controllers/favorite-movies.controller');
 const verifyToken = require('../middlewares/auth.middleware');
 
-// Todas las rutas requieren autenticación
+// Vertificacion de token
 router.use(verifyToken);
 
 // Rutas de películas favoritas
